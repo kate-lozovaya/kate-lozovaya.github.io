@@ -15,12 +15,12 @@
 		window.onload = function()
 		{
 			var ctx = document.getElementById('cvs').getContext('2d');
+
 			var img = new Image();
-			img.src = document.getElementById('img').src;
-			img.onload = function(){
-		    		ctx.drawImage(this, 0, 0);
-				
-				var imageData = ctx.getImageData(0,0,img.width,img.height);
+		    img.src = document.getElementById('img').src;
+		    img.onload = function(){
+		    	ctx.drawImage(this, 0, 0);
+		    	var imageData = ctx.getImageData(0,0,img.width,img.height);
 
 				for(let i = 1; i < img.width-1; i++)
 				{
@@ -37,15 +37,15 @@
 							alpha += pixels.data[k+3];
 						}
 
-						imageData.data[(i*img.width+j)*4] = Math.floor(red/9);
-						imageData.data[(i*img.width+j + 1)*4] = Math.floor(green/9);
-						imageData.data[(i*img.width+j + 2)*4] = Math.floor(blue/9);
-						imageData.data[(i*img.width+j + 3)*4] = Math.floor(alpha/9);
+						imageData.data[(j*img.width+i)*4] = Math.floor(red/9);
+						imageData.data[(j*img.width+i)*4 + 1] = Math.floor(green/9);
+						imageData.data[(j*img.width+i)*4 + 2] = Math.floor(blue/9);
+						imageData.data[(j*img.width+i)*4 + 3] = Math.floor(alpha/9);
 					}
 				}
 				ctx.putImageData(imageData,0,0);
-			}
-			img.crossOrigin = "Anonymous";
+		    }
+		    img.crossOrigin = "Anonymous";
 		}
 	</script>
 </body>
