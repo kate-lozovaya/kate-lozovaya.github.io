@@ -5,30 +5,42 @@
 	<title>Картинка</title>
 </head>
 <body>
-	<canvas id="cvs" height="900" width="1440"></canvas>
-	<img src="img.jpg" id="img" />
+	<img src="foto.png" alt="" id="img" height="229" width="300">
+	<canvas id="cvs" height="229" width="300"></canvas>
 
 	<script>
 		
-		var canvas = document.getElementById('cvs');
-		var ctx = canvas.getContext('2d');
-			
-		var img = new Image();
-		img.onload = function() {
-			ctx.drawImage(this, 0, 0);
-		}
-		img.crossOrigin = "Anonymous";
-		img.src = document.getElementById('img').src;
-
-		/*function draw()
+		document.getElementById('img').onload = function()
 		{
-			var canvas = document.getElementById('img');
-			var obj = canvas.getContext('2d');
+			var canvas = document.getElementById('cvs');
+			var ctx = canvas.getContext('2d');
+			var img = document.getElementById('img')
+			ctx.drawImage(this, 0, 0);
+			img.crossOrigin = "Anonymous";
+			var imageData = ctx.getImageData(0,0,img.width,img.height);
+		
 
-			obj.drawImage(img,0,0);
-			img.style.display = 'none';
+		// var canvas = document.getElementById('cvs');
+		// var ctx = canvas.getContext('2d');
 
-			var imageData = obj.getImageData(0,0,img.width,img.height);
+		// var img = new Image();
+	 //    img.onload = function() 
+	 //    {
+	 //    	ctx.drawImage(this, 0, 0);
+	 //    }
+	 //    img.crossOrigin = "Anonymous";
+		// img.src = document.getElementById('img').src;
+	
+		// var Img  = document.getElementById('img');
+		// blur(Img);
+		
+
+		// function blur(img)
+		// {
+		// 	var canvas = document.getElementById('cvs');
+		// 	var obj = canvas.getContext('2d');
+
+		// 	var imageData = obj.getImageData(0,0,img.width,img.height);
 
 			for(let i = 1; i < img.width-1;i++)
 			{
@@ -51,7 +63,7 @@
 				}
 			}
 			obj.putImageData(imageData,500,0);
-		}*/
+		}
 		
 	</script>
 </body>
