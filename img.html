@@ -5,19 +5,22 @@
 	<title>Картинка</title>
 </head>
 <body>
-	<canvas id="img" height="900" width="1440"></canvas>
+	<canvas id="cvs" height="900" width="1440"></canvas>
+	<img src="img.jpg" id="img" />
 
 	<script>
 		
-
+		var canvas = document.getElementById('cvs');
+		var ctx = canvas.getContext('2d');
+			
 		var img = new Image();
-		img.src = 'https://mdn.mozillademos.org/files/5397/rhino.jpg';
-		img.onload = function() 
-		{
-			draw(this);
+		img.onload = function() {
+			ctx.drawImage(this, 0, 0);
 		}
+		img.crossOrigin = "Anonymous";
+		img.src = document.getElementById('img').src;
 
-		function draw()
+		/*function draw()
 		{
 			var canvas = document.getElementById('img');
 			var obj = canvas.getContext('2d');
@@ -48,7 +51,7 @@
 				}
 			}
 			obj.putImageData(imageData,500,0);
-		}
+		}*/
 		
 	</script>
 </body>
