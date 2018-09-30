@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+
+		<title>Солнечная система(часть)</title>
+
+		<script>
+		
+		var curAng_mercury = 1;
+		var curAng_venus = 1;
+		var curAng_earth = 1;
+
+		setInterval(function draw()
+			{
+				var canvas = document.getElementById('draw');
+				var obj = canvas.getContext('2d');
+
+				obj.clearRect(0,0,canvas.width,canvas.height);
+
+				//orbits
+				var i = 150;
+				while(i < 400)
+				{
+					obj.beginPath();
+					obj.arc(720, 450, i, 0, 2 * Math.PI, false);
+					obj.closePath();
+					obj.strokeStyle = "white";
+					obj.stroke();
+					i = i + 110;
+				}
+
+				//sun
+				var sun_grd = obj.createLinearGradient(670, 400, 770, 500);
+				sun_grd.addColorStop(0, 'OrangeRed');
+				sun_grd.addColorStop(1, 'SandyBrown');
+				obj.fillStyle = sun_grd;
+
+				obj.beginPath();
+				obj.arc(720, 450, 50, 0, 2 * Math.PI, false);
+				obj.fill();
+
+				//planets
+				var radius_to_mercury = 150;
+				var radius_to_venus = 260;
+				var radius_to_earth = 370;
+
+				var radius_mercury = 10;
+				var radius_venus = 25;
+				var radius_earth = 30;
+
+				var x_mercury = 720 + Math.cos(curAng_mercury)*radius_to_mercury;
+				var y_mercury = 450 + Math.sin(curAng_mercury)*radius_to_mercury;
+
+				var x_venus = 720 + Math.cos(curAng_venus)*radius_to_venus;
+				var y_venus = 450 + Math.sin(curAng_venus)*radius_to_venus;
+
+				var x_earth = 720 + Math.cos(curAng_earth)*radius_to_earth;
+				var y_earth = 450 + Math.sin(curAng_earth)*radius_to_earth;
+
+				//mercury
+				var mercury_grd = obj.createLinearGradient(x_mercury - radius_to_mercury, y_mercury - radius_to_mercury, x_mercury + radius_to_mercury, y_mercury + radius_to_mercury);
+				mercury_grd.addColorStop(0, 'Peru');
+				mercury_grd.addColorStop(1, 'SandyBrown');
+				obj.fillStyle = mercury_grd;
+
+				obj.beginPath();
+				obj.arc(x_mercury, y_mercury, radius_mercury, 0, 2 * Math.PI, false);
+				obj.fill();
+
+				//venus
+				var venus_grd = obj.createLinearGradient(x_venus - radius_to_venus, y_venus - radius_to_venus, x_venus + radius_to_venus, y_venus + radius_to_venus);
+				venus_grd.addColorStop(0, 'IndianRed');
+				venus_grd.addColorStop(1, 'Red');
+				obj.fillStyle = venus_grd;
+				
+				obj.beginPath();
+				obj.arc(x_venus, y_venus, radius_venus, 0, 2 * Math.PI, false);
+				obj.fill();
+
+				//earth
+				var earth_grd = obj.createLinearGradient(x_earth - radius_to_earth, y_earth - radius_to_earth, x_earth + radius_to_earth, y_earth + radius_to_earth);
+				earth_grd.addColorStop(0, 'DodgerBlue');
+				earth_grd.addColorStop(1, 'SeaGreen');
+				obj.fillStyle = earth_grd;
+
+				obj.beginPath();
+				obj.arc(x_earth, y_earth, radius_earth, 0, 2 * Math.PI, false);
+				obj.fill();
+
+				curAng_mercury = curAng_mercury + Math.PI/900;
+				curAng_venus = curAng_venus + Math.PI/1100;
+				curAng_earth = curAng_earth + Math.PI/1300;
+			}, 50)
+      
+		</script>
+	</head>
+
+	<body style="background-color: black;" onLoad="draw()">
+		<canvas id="draw" height="900" width="1440"></canvas>
+	</body>
+</html>
