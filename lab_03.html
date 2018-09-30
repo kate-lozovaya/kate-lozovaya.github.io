@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>Bresenham's algorithm</title>
+</head>
+
+<body>
+	<canvas id="draw" height="900" width="1440"></canvas>
+
+	<script>    
+		var canvas = document.getElementById("draw"), 
+        context = canvas.getContext("2d"),
+        w = canvas.width,
+        h=canvas.height,
+        count = 0,
+	    mouse = { x0:0, y0:0, x1:0, y1:0 };
+        
+    	canvas.addEventListener("mousedown", function(e)
+    	{
+    		if(count == 0)
+    		{
+    			mouse.x0 = e.clientX;
+                mouse.y0 = e.clientY;
+                count++;
+    		}
+    		else if (count == 1)
+    		{
+    			mouse.x1 = e.clientX;
+                mouse.y1 = e.clientY;
+                count++;
+    		}
+            context.fillRect(e.clientX, e.clientY, 1, 1);
+            if(count == 2)
+            {
+            	count = 0;
+            	draw(mouse.x0,mouse.y0,mouse.x1,mouse.y1);
+            }
+            
+   		});
+
+   		function draw(x0,y0,x1,y1)
+   		{
+   			draw__line(x0,y0,x1,y1);
+   			draw__circle(x0,y0,x1,y1);
+   		}
+
+    	function draw__circle(x0,y0,x1,y1)
+    	{
+		    var dY = Math.sqrt(Math.pow((x1 - x0),2) + Math.pow((y1 - y0),2));
+		    var gap = 0;
+		    var delta = (2 - 2 * dY);
+			var dX = 0;
+
+		    while (dY >= 0)
+		    {
+		    	context.fillRect(x0 + dX, y0 - dY, 1, 1);
+		    	context.fillRect(x0 - dX, y0 - dY, 1, 1);
+		    	context.fillRect(x0 - dX, y0 + dY, 1, 1);
+		    	context.fillRect(x0 + dX, y0 + dY, 1, 1);
+		        gap = 2 * (delta + dY) - 1;
+		        if (delta < 0 && gap <= 0)
+		        {
+		            dX++;
+		            delta += 2 * dX + 1;
+		            continue;
+		        }
+		        if (delta > 0 && gap > 0)
+		        {
+		            dY--;
+		            delta -= 2 * dY + 1;
+		            continue;
+		        }
+		        dX++;
+		        delta += 2 * (dX - dY);
+		        dY--;
+		    }
+    	}
+
+    	function draw__line(x0,y0,x1,y1)
+    	{
+    		var dX = Math.abs(x1 - x0);
+		    var dY = Math.abs(y1 - y0);
+		    var signX = x0 < x1 ? 1 : -1;
+		    var signY = y0 < y1 ? 1 : -1;
+		    
+		    var error = dX - dY;
+		    
+		    context.fillRect(x1, y1, 1, 1);
+		    while(x0 != x1 || y0 != y1) 
+		   {
+		        context.fillRect(x0, y0, 1, 1);
+		        var error2 = error * 2;
+		        //
+		        if(error2 > -dY) 
+		        {
+		            error -= dY;
+		            x0 += signX;
+		        }
+		        if(error2 < dX) 
+		        {
+		            error += dX;
+		            y0 += signY;
+		        }
+		    }
+    	}
+
+        </script>
+</body>
+</html>
