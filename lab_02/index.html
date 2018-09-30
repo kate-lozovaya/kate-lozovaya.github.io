@@ -3,8 +3,6 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Картинка</title>
-
-	
 </head>
 <body>
 	<h1 style = "text-align: center;">Сглаживание<h1>
@@ -13,15 +11,14 @@
 
 	<script>
 
-		window.onload = function()
-		{
+		window.onload = function(){
 			var ctx = document.getElementById('cvs').getContext('2d');
 
 			var img = new Image();
-		    img.src = document.getElementById('img').src;
-		    img.onload = function(){
-		    	ctx.drawImage(this, 0, 0);
-		    	var imageData = ctx.getImageData(0,0,img.width,img.height);
+			img.src = document.getElementById('img').src;
+			img.onload = function(){
+				ctx.drawImage(this, 0, 0);
+				var imageData = ctx.getImageData(0,0,img.width,img.height);
 
 				for(let i = 1; i < img.width-1; i++)
 				{
@@ -44,10 +41,11 @@
 						imageData.data[(j*img.width+i)*4 + 3] = Math.floor(alpha/9);
 					}
 				}
-				ctx.putImageData(imageData,0,0);
-		    }
-		    img.crossOrigin = "Anonymous";
+			ctx.putImageData(imageData,0,0);
+			}
+		img.crossOrigin = "Anonymous";
 		}
+		
 	</script>
 </body>
 </html>
