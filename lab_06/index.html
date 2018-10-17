@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
 	<meta charset="UTF-8">
 	<title>Cyrus — Beck</title>
@@ -20,7 +20,7 @@
 		<p>Сначала нарисовать отрезок, затем выбрать произвольную область, внутри которой он должна остаться.</p>
 	</div>
 
-	 <script>
+	<script>
 		var ctx = document.getElementById('cvs').getContext('2d');
 
 		mouse__coords = [];
@@ -68,7 +68,7 @@
 
 		function draw__pixel(pt)
 		{
-        	ctx.fillRect(pt[0], pt[1], 1, 1);
+			ctx.fillRect(pt[0], pt[1], 1, 1);
 		}
 
 		function process__mouse__click(event, type)
@@ -111,7 +111,7 @@
 				}
 			}
 		}
-		
+
 		function draw__line(pt1, pt2)
 		{
 			ctx.beginPath()
@@ -215,7 +215,7 @@
 			return [pt2[0]-pt1[0],pt2[1]-pt1[1]];
 		}
 
-		function normal(pt1,pt2) //возвращается одна точка
+		function normal(pt1,pt2)
 		{
 			return [pt2[1]-pt1[1],pt1[0]-pt2[0]];
 		}
@@ -224,7 +224,7 @@
 		{
 			return [pt1[0] + t*(pt2[0] - pt1[0]), pt1[1] + t*(pt2[1] - pt1[1])];
 		}
-		
-	 </script>
+
+	</script>
 </body>
 </html>
