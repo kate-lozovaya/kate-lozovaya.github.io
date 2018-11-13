@@ -38,12 +38,11 @@
 
 	<script>
 		var cvs = document.getElementById("cvs"), 
-        ctx = cvs.getContext("2d"),
+		ctx = cvs.getContext("2d"),
 
 		coords = [],
 		poly = [],
-		points = [];
-		mouse__coords = [],
+		points = [],
 		points__ = [];
 
 		var button = document.getElementById('clear');
@@ -88,8 +87,8 @@
 		}
 
 		function mouse__click(event,type)
-    	{
-    		var x, y;
+    		{
+    			var x, y;
 			var rect = cvs.getBoundingClientRect(),
 			x = event.clientX - rect.left,
 			y = event.clientY - rect.top;
@@ -146,7 +145,7 @@
 
    		function draw__pixel(pt)
 		{
-        	ctx.fillRect(pt[0], pt[1], 1, 1);
+        		ctx.fillRect(pt[0], pt[1], 1, 1);
 		}
 
 		function draw__line(pt1, pt2)
