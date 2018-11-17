@@ -36,9 +36,9 @@
 
 	<script>
 		var cvs = document.getElementById("cvs"), 
-        ctx = cvs.getContext("2d");
+		ctx = cvs.getContext("2d");
 
-        var button = document.getElementById('clear');
+		var button = document.getElementById('clear');
 		button.addEventListener('click',clear,false);
 
 		var coords = [], points = [];
@@ -50,12 +50,11 @@
 			points = [];
 		}
 
-        cvs.addEventListener('click', function(event){
-        	var x, y;
+        	cvs.addEventListener('click', function(event){
+        		var x, y;
 			var rect = cvs.getBoundingClientRect(),
 			x = event.clientX - rect.left,
 			y = event.clientY - rect.top;
-			//event.preventDefault();
 
 			if(event.which == 1)
 			{
@@ -69,26 +68,26 @@
 
 		cvs.addEventListener('contextmenu', function(event){
 			event.preventDefault();
-	   			for(let t = 0; t < 1.005; t += 0.005)
-	   			{
-	   				var line = main__line(t),
-		   			x = line[0][0] + delta(line[0],line[1])[0]*t,
-					y = line[0][1] + delta(line[0],line[1])[1]*t;
-					points.push([x,y]);
-	   			}
-	   			for(let i = 0; i < points.length - 1; i++)
-	   			{
-					ctx.strokeStyle = "#A5260A";
-					draw__line(points[i],points[i+1]);
-	   			}
-				coords = [];
-				points = [];
+			for(let t = 0; t < 1.005; t += 0.005)
+			{
+				var line = main__line(t),
+				x = line[0][0] + delta(line[0],line[1])[0]*t,
+				y = line[0][1] + delta(line[0],line[1])[1]*t;
+				points.push([x,y]);
+			}
+			for(let i = 0; i < points.length - 1; i++)
+			{
+				ctx.strokeStyle = "#A5260A";
+				draw__line(points[i],points[i+1]);
+			}
+			coords = [];
+			points = [];
 			
-        });
+		});
 
-        function draw__pixel(pt)
+		function draw__pixel(pt)
 		{
-        	ctx.fillRect(pt[0], pt[1], 1, 1);
+        		ctx.fillRect(pt[0], pt[1], 1, 1);
 		}
 
 		function draw__line(pt1, pt2)
@@ -100,7 +99,7 @@
 			ctx.stroke();
 		}
 
-        function main__line(t)
+		function main__line(t)
 		{
 			var new__coords = coords,
 			line = [];
