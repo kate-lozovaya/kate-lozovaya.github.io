@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
 	<meta charset="UTF-8">
 	<title>Fill polygon</title>
@@ -35,15 +35,16 @@
 		<button type="button" onclick="pixel();" style="width: 100px">Затравляющий пиксель</button>
 		<button type="button" id="clear" style="width: 100px">Очистить</button>
 		<p>Чтобы завершить многоугольник, кликнуть левой кнопкой мыши (не является точкой)</p>
+		<p>Затравляющий пиксель ставить в область для заливки</p>
 	</div>
 
 	<script>
 		var cvs = document.getElementById("cvs"), 
-        ctx = cvs.getContext("2d"),
+		ctx = cvs.getContext("2d"),
 
-        poly = [];
+		poly = [];
 
-        var B = 'rgb(30,89,69)', A = 'rgb(63,136,143)';
+		var B = 'rgb(30,89,69)', A = 'rgb(63,136,143)';
 
 		var button = document.getElementById('clear');
 		button.addEventListener('click',clear,false);
@@ -102,7 +103,6 @@
 				else if(event.which == 3)
 				{
 					draw__line(poly[poly.length - 1], poly[0]);
-					console.log(color(poly[0]));
 					poly = [];
 				}
 			}
@@ -110,7 +110,6 @@
 			{
 				ctx.fillStyle = A;
 				ctx.strokeStyle = A;
-
 				draw__pixel([x,y]);
 				fill([x,y]);
 			}
@@ -119,37 +118,37 @@
 
 		function draw__pixel(pt)
 		{
-        	ctx.fillRect(pt[0], pt[1], 1, 1);
+        		ctx.fillRect(pt[0], pt[1], 1, 1);
 		}
 
 		function draw__line(pt1,pt2)
-    	{
-    		var x0 = pt1[0], x1 = pt2[0], y0 = pt1[1], y1 = pt2[1];
-    		var dX = Math.abs(x1 - x0);
-		    var dY = Math.abs(y1 - y0);
-		    var signX = x0 < x1 ? 1 : -1;
-		    var signY = y0 < y1 ? 1 : -1;
+    		{
+			var x0 = pt1[0], x1 = pt2[0], y0 = pt1[1], y1 = pt2[1];
+			var dX = Math.abs(x1 - x0);
+			var dY = Math.abs(y1 - y0);
+			var signX = x0 < x1 ? 1 : -1;
+			var signY = y0 < y1 ? 1 : -1;
 		    
-		    var error = dX - dY;
-		    
-		    ctx.fillRect(x1, y1, 1, 1);
-		    while(x0 != x1 || y0 != y1) 
-		   {
-		        ctx.fillRect(x0, y0, 1, 1);
-		        var error2 = error * 2;
-		        //
-		        if(error2 > -dY) 
-		        {
-		            error -= dY;
-		            x0 += signX;
-		        }
-		        if(error2 < dX) 
-		        {
-		            error += dX;
-		            y0 += signY;
-		        }
-		    }
-    	}
+			var error = dX - dY;
+
+			ctx.fillRect(x1, y1, 1, 1);
+			while(x0 != x1 || y0 != y1) 
+			{
+				ctx.fillRect(x0, y0, 1, 1);
+				var error2 = error * 2;
+				
+				if(error2 > -dY) 
+				{
+				    error -= dY;
+				    x0 += signX;
+				}
+				if(error2 < dX) 
+				{
+				    error += dX;
+				    y0 += signY;
+				}
+			}
+		}
 
 		function fill(pt)
 		{
