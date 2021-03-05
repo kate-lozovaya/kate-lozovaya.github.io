@@ -1,7 +1,7 @@
 * {
 	margin: 0;
 	box-sizing: border-box;
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'Roboto Mono', monospace;
 	text-decoration: none;
 	color: #000;
 }
@@ -11,7 +11,7 @@ body {
 }
 
 .title {
-	font-size: 38px;
+	font-size: 34px;
 }
 
 .links {
@@ -21,13 +21,40 @@ body {
 .link {
 	margin: 0 0 12px;
 	font-size: 18px;
+	position: relative;
 }
 .link>span {
 	margin-right: 5px;
+	transition: 0.3s;
+}
+.link>a {
+	transition: 0.5s;
+}
+.link:after {
+	content: '';
+	opacity: 0;
+	background-color: #000;
+	position: absolute;
+	left: -25px;
+	top: 11px;
+	height: 2px;
+	width: 15px;
+	transition: 0.5s;
 }
 
 @media (hover: hover) {
+	.link:hover span {
+		opacity: 0;
+		transform: scale(0);
+	}
+	.link:hover a {
+		padding-left: 20px;
+	}
+	.link:hover:after {
+		left: 15px;
+		opacity: 1;
+	}
 	.link>a:hover {
-		font-weight: bold;
+		
 	}
 }
