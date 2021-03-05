@@ -1,0 +1,33 @@
+* {
+	margin: 0;
+	box-sizing: border-box;
+	font-family: 'Montserrat', sans-serif;
+	text-decoration: none;
+	color: #000;
+}
+
+body {
+	padding: 50px 100px;
+}
+
+.title {
+	font-size: 38px;
+}
+
+.links {
+	margin-top: 35px;
+	list-style-type: decimal;
+}
+.link {
+	margin: 0 0 12px;
+	font-size: 18px;
+}
+.link>span {
+	margin-right: 5px;
+}
+
+@media (hover: hover) {
+	.link>a:hover {
+		font-weight: bold;
+	}
+}
